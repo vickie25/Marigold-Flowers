@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxe Flowers Wireframe</title>
+
+  <style>
+    :root {
+      --font-sans: Arial, Helvetica, sans-serif;
+
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f7f7f7;
+      --color-background-tertiary: #eeeeee;
+
+      --color-border-secondary: #d7d7d7;
+      --color-border-tertiary: #cfcfcf;
+
+      --color-text-primary: #222;
+      --color-text-secondary: #666;
+      --color-text-tertiary: #999;
+
+      --color-background-danger: #ffe3e3;
+      --color-text-danger: #cc0000;
+
+      --color-background-success: #e7f8ea;
+      --color-text-success: #14803c;
+
+      --border-radius-md: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #fff;
+      padding: 20px;
+      color: var(--color-text-primary);
+    }
+
+    .wf-page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* REUSABLE BLOCK */
+    .wf-block {
+      border: 0.5px solid var(--color-border-secondary);
+      background: var(--color-background-secondary);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .wf-label {
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 4px;
+    }
+
+    .wf-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .wf-sub {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+
+    .section-header {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 8px 0 2px;
+      border-top: 1px dashed var(--color-border-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-header .tag {
+      background: var(--color-background-tertiary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 9px;
+    }
+
+    .accent-line {
+      flex: 1;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--color-border-secondary);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .ann {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 10px;
+      color: var(--color-text-secondary);
+    }
+
+    .ann-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .wf-img {
+      background-image: repeating-linear-gradient(45deg,
+          var(--color-border-tertiary) 0px,
+          var(--color-border-tertiary) 1px,
+          transparent 1px,
+          transparent 8px);
+      background-color: var(--color-background-secondary);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      height: 70px;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-direction: row;
+    }
+
+    .nav-links,
+    .nav-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      height: 340px;
+      padding: 32px;
+      align-items: flex-start;
+      justify-content: flex-end;
+      flex-direction: column;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 380px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .hero-dots div {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #bbb;
+    }
+
+    .hero-dots .active {
+      background: #222;
+    }
+
+    /* CATEGORY */
+    .category-card {
+      flex: 1;
+      min-width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--color-border-secondary);
+      font-size: 22px;
+    }
+
+    /* PRODUCT CARD */
+    .product-card {
+      flex: 1;
+      min-width: 220px;
+      background: #fff;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      height: 180px;
+      position: relative;
+      border: none;
+      border-radius: 0;
+    }
+
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .badge.sale {
+      background: var(--color-background-danger);
+      color: var(--color-text-danger);
+    }
+
+    .badge.new {
+      background: var(--color-background-success);
+      color: var(--color-text-success);
+    }
+
+    .wishlist {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 16px;
+    }
+
+    .product-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* TESTIMONIAL */
+    .testimonial {
+      flex: 1;
+      min-width: 250px;
+      padding: 16px;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-border-tertiary);
+      padding-top: 12px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .payment-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+        padding: 20px;
+      }
+
+      .hero {
+        height: 260px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .product-card {
+        min-width: 100%;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wf-page">
+
+    <!-- TOP BAR -->
+    <div class="section-header">
+      Top announcement bar
+      <span class="tag">sticky · full-width</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="wf-block" style="height:32px;border-radius:0;">
+      <span class="ann">📍 Free delivery | Promo code | Phone number</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="section-header">
+      Navigation
+      <span class="tag">sticky · 70px</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="wf-block navbar">
+
+      <div class="wf-block wf-img" style="width:120px;height:44px;">
+        LOGO
+      </div>
+
+      <div class="nav-links">
+        <span class="ann">Home</span>
+        <span class="ann">Shop ▾</span>
+        <span class="ann">Occasions ▾</span>
+        <span class="ann">About</span>
+        <span class="ann">Contact</span>
+      </div>
+
+      <div class="nav-actions">
+        <span class="ann">🔍</span>
+        <span class="ann">🛒 Cart (2)</span>
+        <span class="ann" style="background:#25d366;color:#fff;border:none;">
+          WhatsApp
+        </span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="section-header">
+      Hero / Slider
+      <span class="tag">full-width</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="wf-block wf-img hero">
+
+      <div class="hero-content">
+
+        <div class="wf-block" style="width:90px;height:24px;">
+          TAGLINE
+        </div>
+
+        <h1 style="font-size:32px;">
+          Fresh Flowers Delivered
+        </h1>
+
+        <div class="wf-sub">
+          Beautiful bouquets delivered same day in Nairobi.
+        </div>
+
+        <div class="hero-buttons">
+          <div class="wf-block" style="width:130px;height:40px;">
+            Shop Now →
+          </div>
+
+          <div class="wf-block" style="width:150px;height:40px;">
+            Same Day Delivery
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero-dots">
+        <div class="active"></div>
+        <div></div>
+        <div></div>
+      </div>
+
+    </div>
+
+    <!-- TRUST BAR -->
+    <div class="section-header">
+      Trust Strip
+      <span class="tag">4 columns</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="row">
+
+      <div class="wf-block" style="height:60px;flex-direction:column;">
+        🚚
+        <span class="wf-sub">Same-Day Delivery</span>
+      </div>
+
+      <div class="wf-block" style="height:60px;flex-direction:column;">
+        🌸
+        <span class="wf-sub">Fresh Flowers</span>
+      </div>
+
+      <div class="wf-block" style="height:60px;flex-direction:column;">
+        💳
+        <span class="wf-sub">Secure Payment</span>
+      </div>
+
+      <div class="wf-block" style="height:60px;flex-direction:column;">
+        🎁
+        <span class="wf-sub">Gift Wrapping</span>
+      </div>
+
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="section-header">
+      Shop by Occasion
+      <span class="tag">categories</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="row">
+
+      <div class="category-card">
+        <div class="wf-block wf-img category-circle">🎂</div>
+        <span>Birthday</span>
+      </div>
+
+      <div class="category-card">
+        <div class="wf-block wf-img category-circle">💍</div>
+        <span>Anniversary</span>
+      </div>
+
+      <div class="category-card">
+        <div class="wf-block wf-img category-circle">💒</div>
+        <span>Wedding</span>
+      </div>
+
+      <div class="category-card">
+        <div class="wf-block wf-img category-circle">❤️</div>
+        <span>Romance</span>
+      </div>
+
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="section-header">
+      Featured Products
+      <span class="tag">product grid</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="row">
+
+      <!-- CARD -->
+      <div class="product-card">
+
+        <div class="wf-block wf-img product-image">
+          <div class="badge sale">SALE</div>
+          <div class="wishlist">🤍</div>
+        </div>
+
+        <div class="product-content">
+
+          <span class="wf-label">ROSES</span>
+
+          <div class="wf-title">Luxury Rose Bouquet</div>
+
+          <div>
+            <strong>KES 2,500</strong>
+            <span style="text-decoration:line-through;color:#999;">
+              KES 3,000
+            </span>
+          </div>
+
+          <div>⭐⭐⭐⭐⭐ (24)</div>
+
+          <div class="wf-block" style="height:34px;">
+            Add to Cart
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+      <div class="product-card">
+
+        <div class="wf-block wf-img product-image">
+          <div class="badge new">NEW</div>
+        </div>
+
+        <div class="product-content">
+
+          <span class="wf-label">LILIES</span>
+
+          <div class="wf-title">Elegant Lily Mix</div>
+
+          <div>
+            <strong>KES 1,800</strong>
+          </div>
+
+          <div>⭐⭐⭐⭐⭐ (12)</div>
+
+          <div class="wf-block" style="height:34px;">
+            Add to Cart
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="section-header">
+      Testimonials
+      <span class="tag">reviews</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="row">
+
+      <div class="testimonial">
+        <div style="margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+
+        <div class="wf-sub" style="line-height:1.6;">
+          “The flowers arrived fresh and beautifully arranged.”
+        </div>
+
+        <div style="margin-top:14px;font-weight:600;">
+          Jane Mwangi
+        </div>
+
+        <div class="wf-sub">
+          Nairobi, Kenya
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div style="margin-bottom:10px;">⭐⭐⭐⭐⭐</div>
+
+        <div class="wf-sub" style="line-height:1.6;">
+          “Amazing customer service and same-day delivery.”
+        </div>
+
+        <div style="margin-top:14px;font-weight:600;">
+          Brian Otieno
+        </div>
+
+        <div class="wf-sub">
+          Nairobi, Kenya
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="section-header">
+      Newsletter
+      <span class="tag">CTA</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="wf-block" style="height:130px;flex-direction:column;gap:14px;">
+
+      <div class="wf-title">
+        Get 10% off your first order
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+        <div class="wf-block" style="width:220px;height:40px;">
+          Enter your email
+        </div>
+
+        <div class="wf-block" style="width:120px;height:40px;">
+          Subscribe
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section-header">
+      Footer
+      <span class="tag">4 columns</span>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="footer">
+
+      <div class="row">
+
+        <div class="col">
+          <div class="wf-block wf-img" style="width:100px;height:40px;">
+            LOGO
+          </div>
+
+          <div class="wf-sub">
+            Luxury flowers delivered across Nairobi.
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="wf-label">Quick Links</div>
+          <span>Home</span>
+          <span>Shop</span>
+          <span>Contact</span>
+        </div>
+
+        <div class="col">
+          <div class="wf-label">Categories</div>
+          <span>Birthday</span>
+          <span>Wedding</span>
+          <span>Romance</span>
+        </div>
+
+        <div class="col">
+          <div class="wf-label">Contact</div>
+          <span>📞 +254 700 000 000</span>
+          <span>📍 Nairobi, Kenya</span>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <div class="wf-sub">
+          © 2025 Luxe Flowers Kenya
+        </div>
+
+        <div class="payment-row">
+          <div class="wf-block" style="width:50px;height:24px;">Visa</div>
+          <div class="wf-block" style="width:50px;height:24px;">M-Pesa</div>
+          <div class="wf-block" style="width:50px;height:24px;">PayPal</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

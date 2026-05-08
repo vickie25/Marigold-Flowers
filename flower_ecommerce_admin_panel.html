@@ -1,0 +1,509 @@
+
+<h2 class="sr-only">Flower ecommerce admin panel — full module breakdown with all sections, fields, and features needed</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.page{display:flex;flex-direction:column;gap:0;padding-bottom:32px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-secondary);position:sticky;top:0;z-index:10}
+.topbar-title{font-size:14px;font-weight:500;color:var(--color-text-primary);display:flex;align-items:center;gap:8px}
+.topbar-badges{display:flex;gap:6px}
+.badge{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:500;white-space:nowrap}
+.badge-green{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-amber{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-blue{background:var(--color-background-info);color:var(--color-text-info)}
+.badge-red{background:var(--color-background-danger);color:var(--color-text-danger)}
+.layout{display:flex;min-height:600px}
+.sidebar{width:210px;flex-shrink:0;border-right:0.5px solid var(--color-border-tertiary);padding:12px 0;background:var(--color-background-secondary)}
+.nav-section-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;padding:12px 16px 4px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:13px;color:var(--color-text-secondary);cursor:pointer;border-radius:0;transition:background .1s}
+.nav-item:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.nav-item.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border-right:2px solid var(--color-text-info)}
+.nav-item i{font-size:15px;opacity:.7}
+.nav-item .count{margin-left:auto;font-size:10px;padding:1px 6px;border-radius:99px;background:var(--color-background-danger);color:var(--color-text-danger);font-weight:500}
+.content{flex:1;overflow:auto;padding:20px}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:14px;padding-bottom:8px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px}
+.section-title i{font-size:15px;color:var(--color-text-secondary)}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.module-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s}
+.module-card:hover{border-color:var(--color-border-secondary)}
+.module-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.module-card-head i{font-size:18px;color:var(--color-text-secondary)}
+.module-card-head .label{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.module-card-head .badge{margin-left:auto}
+.field-list{display:flex;flex-direction:column;gap:4px}
+.field{display:flex;align-items:flex-start;gap:6px;font-size:12px;color:var(--color-text-secondary);line-height:1.4}
+.field i{font-size:13px;margin-top:1px;flex-shrink:0;color:var(--color-text-tertiary)}
+.field .key{color:var(--color-text-primary);font-weight:500;margin-right:2px;flex-shrink:0}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:20px 0}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.stat-val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.stat-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.wide-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:10px}
+.wide-card-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.wide-card-head i{font-size:18px;color:var(--color-text-secondary)}
+.wide-card-head .label{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.wide-card-head .badge{margin-left:auto}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.sub-section{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.sub-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.chip-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.chip{font-size:11px;padding:3px 8px;border-radius:99px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.note{font-size:11px;color:var(--color-text-tertiary);background:var(--color-background-secondary);border-left:2px solid var(--color-border-secondary);border-radius:0 4px 4px 0;padding:6px 10px;margin-top:8px;line-height:1.5}
+.tab-row{display:flex;gap:2px;margin-bottom:14px;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:0}
+.tab{font-size:12px;padding:6px 12px;color:var(--color-text-secondary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px}
+.tab.on{color:var(--color-text-info);border-bottom-color:var(--color-text-info);font-weight:500}
+</style>
+
+<div class="page">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">
+    <i class="ti ti-plant-2" aria-hidden="true"></i>
+    [Brand] Admin — Flower Ecommerce Control Centre
+  </div>
+  <div class="topbar-badges">
+    <span class="badge badge-red">12 new orders</span>
+    <span class="badge badge-amber">3 low stock</span>
+    <span class="badge badge-green">Delivery active</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="nav-section-label">Overview</div>
+  <div class="nav-item active"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</div>
+  <div class="nav-item"><i class="ti ti-chart-bar" aria-hidden="true"></i> Analytics</div>
+
+  <div class="nav-section-label">Store</div>
+  <div class="nav-item"><i class="ti ti-shopping-cart" aria-hidden="true"></i> Orders <span class="count">12</span></div>
+  <div class="nav-item"><i class="ti ti-truck-delivery" aria-hidden="true"></i> Deliveries</div>
+  <div class="nav-item"><i class="ti ti-flower" aria-hidden="true"></i> Products</div>
+  <div class="nav-item"><i class="ti ti-layers-intersect" aria-hidden="true"></i> Categories</div>
+  <div class="nav-item"><i class="ti ti-box" aria-hidden="true"></i> Inventory</div>
+  <div class="nav-item"><i class="ti ti-tag" aria-hidden="true"></i> Discounts & Coupons</div>
+
+  <div class="nav-section-label">Customers</div>
+  <div class="nav-item"><i class="ti ti-users" aria-hidden="true"></i> Customers</div>
+  <div class="nav-item"><i class="ti ti-heart" aria-hidden="true"></i> Subscriptions</div>
+  <div class="nav-item"><i class="ti ti-star" aria-hidden="true"></i> Reviews</div>
+
+  <div class="nav-section-label">Content</div>
+  <div class="nav-item"><i class="ti ti-photo" aria-hidden="true"></i> Media Library</div>
+  <div class="nav-item"><i class="ti ti-file-text" aria-hidden="true"></i> Blog & SEO</div>
+  <div class="nav-item"><i class="ti ti-mail" aria-hidden="true"></i> Email Templates</div>
+
+  <div class="nav-section-label">Business</div>
+  <div class="nav-item"><i class="ti ti-report-money" aria-hidden="true"></i> Financial Reports</div>
+  <div class="nav-item"><i class="ti ti-building" aria-hidden="true"></i> Suppliers</div>
+  <div class="nav-item"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> WhatsApp Logs</div>
+
+  <div class="nav-section-label">System</div>
+  <div class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</div>
+  <div class="nav-item"><i class="ti ti-shield-check" aria-hidden="true"></i> Staff & Roles</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- DASHBOARD STATS -->
+  <div class="section-title"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard overview</div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-label">Today's revenue</div><div class="stat-val">KES 24,800</div><div class="stat-sub">+18% vs yesterday</div></div>
+    <div class="stat"><div class="stat-label">Orders today</div><div class="stat-val">17</div><div class="stat-sub">12 pending · 5 delivered</div></div>
+    <div class="stat"><div class="stat-label">Avg order value</div><div class="stat-val">KES 1,459</div><div class="stat-sub">This month</div></div>
+    <div class="stat"><div class="stat-label">Flowers in stock</div><div class="stat-val">3 alerts</div><div class="stat-sub">Low inventory</div></div>
+  </div>
+
+  <!-- ORDERS MODULE -->
+  <div class="section-title"><i class="ti ti-shopping-cart" aria-hidden="true"></i> 1. Orders management</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-list-details" aria-hidden="true"></i><span class="label">Order list & filters</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order ID</span>auto-generated #001</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Status</span>Pending · Confirmed · Preparing · Out for delivery · Delivered · Cancelled · Refunded</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Customer name & phone</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Recipient name, phone & address</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order date & delivery date</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery time slot</span>morning / afternoon / specific time</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Products ordered</span>name, qty, size, add-ons</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Personalized message card</span>text included</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order total, delivery fee, discount</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Payment method</span>M-Pesa / card / COD</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Payment status</span>Paid / Pending / Refunded</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order source</span>Website / WhatsApp / Phone / Walk-in</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Special instructions</span>e.g. "leave at gate"</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Internal notes</span>staff-only comments</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Assigned florist / designer</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Assigned driver</span></span></div>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-adjustments" aria-hidden="true"></i><span class="label">Order actions & workflow</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">One-click status change</span>with timestamp log</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Print order / work ticket</span>for florist workshop</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Print delivery slip</span>for driver</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Send WhatsApp confirmation</span>to customer</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Send delivery notification</span>to recipient</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Manually assign driver</span>from staff list</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Refund / partial refund</span>with reason</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Cancel order</span>with cancellation fee option</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Edit order items</span>after placement</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Duplicate order</span>for repeat customers</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Add order note</span>internal or customer-visible</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order audit trail</span>who changed what & when</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Filters</span>by date, status, driver, area, channel</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Export orders to CSV</span>for end-of-day reports</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Bulk status update</span>select multiple orders</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERY MODULE -->
+  <div class="section-title"><i class="ti ti-truck-delivery" aria-hidden="true"></i> 2. Delivery & dispatch management</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-map-pin" aria-hidden="true"></i><span class="label">Delivery board</span><span class="badge badge-amber">Critical</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Today's delivery calendar</span>all slots at a glance</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Morning / afternoon run</span>grouped by time slot</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Map view</span>all today's stops pinned on a map</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Route optimization</span>most efficient delivery order</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Driver assignment</span>drag orders onto driver</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Driver live location</span>GPS tracking on map</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery status per stop</span>En route / Arrived / Delivered / Failed</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Failed delivery reason</span>No one home / Wrong address / Refused</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Photo confirmation</span>driver uploads delivery photo</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Recipient signature capture</span>via driver app</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Same-day cutoff control</span>enable/disable after 1 PM</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery zone settings</span>areas we cover & fees per zone</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Block-out dates</span>holidays / unavailable days</span></div>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-user-check" aria-hidden="true"></i><span class="label">Driver management</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Driver profile</span>name, phone, vehicle, license plate</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Driver availability</span>working days & hours</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Orders assigned today</span>count & list</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery history</span>past orders & completion rate</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Earnings per driver</span>for payroll</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Push notification to driver</span>new assignment alert</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Time slot management</span>max orders per slot</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery prep time</span>lead time before dispatch</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Customer notification templates</span>auto WhatsApp / SMS on dispatch</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery fee calculator</span>by zone / distance</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS MODULE -->
+  <div class="section-title"><i class="ti ti-flower" aria-hidden="true"></i> 3. Product management</div>
+  <div class="wide-card">
+    <div class="wide-card-head"><i class="ti ti-flower" aria-hidden="true"></i><span class="label">Product fields — every flower / bouquet listing</span><span class="badge badge-blue">Core</span></div>
+    <div class="two-col">
+      <div class="sub-section">
+        <div class="sub-label">Basic info</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Product name</span>e.g. "Classic Red Rose Bouquet"</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">SKU / product code</span>for inventory tracking</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Short description</span>shown on category grid</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Long description</span>product page copy</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Care instructions</span>separate field</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Category</span>multi-select (Birthday, Romance, etc.)</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Flower type tags</span>Rose, Lily, Orchid, Sunflower…</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Product status</span>Active / Draft / Hidden / Out of season</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Featured product</span>toggle (shows on homepage)</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Badge label</span>Best Seller / New / Sale / Limited</span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Pricing & variations</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Base price</span>KES</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Sale price</span>with date range for sale period</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Size variations</span>Small / Medium / Large + price per size</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Stem count options</span>6 / 12 / 24 stems + prices</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Add-on options</span>Vase / Chocolates / Card / Balloon prices</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Colour options</span>red / pink / white / mixed</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Stock quantity per variation</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Low stock threshold</span>alert when below X</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Allow backorders</span>yes / no</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Availability dates</span>seasonal products on/off</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note">Images: main product photo + 3–5 gallery shots (close-up, lifestyle, packaging). All uploaded from Media Library with alt text field for SEO.</div>
+    <div class="chip-row">
+      <span class="chip">SEO title</span><span class="chip">SEO description</span><span class="chip">URL slug</span>
+      <span class="chip">Related products</span><span class="chip">Upsell suggestions</span><span class="chip">Sort order (position)</span>
+      <span class="chip">Tax class</span><span class="chip">Weight / dimensions</span><span class="chip">Shipping class</span>
+    </div>
+  </div>
+
+  <!-- INVENTORY MODULE -->
+  <div class="divider"></div>
+  <div class="section-title"><i class="ti ti-box" aria-hidden="true"></i> 4. Inventory management</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-plant" aria-hidden="true"></i><span class="label">Flower stock tracking</span><span class="badge badge-amber">Perishable</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Flower name & variety</span>e.g. "Red Naomi Rose"</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Current stems in stock</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Received date</span>freshness tracking</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Expiry / discard date</span>auto-calculated (+ N days)</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Freshness status</span>Fresh / Use today / Discard</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Cost per stem</span>from supplier</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Supplier</span>linked to supplier profile</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Reorder point</span>alert below X stems</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Daily opening count</span>morning stock check</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Wastage log</span>discarded stems with reason</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Usage log</span>stems used per order</span></div>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-package" aria-hidden="true"></i><span class="label">Supplies & packaging</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Item name</span>wrapping paper, ribbon, boxes, vases…</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Current quantity</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Unit</span>rolls / sheets / pieces</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Reorder alert</span>below X units</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Cost per unit</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Supplier & lead time</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Add-on stock</span>chocolates, cards, balloons, teddies</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Add-on cost price</span>vs selling price</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Auto-deduct from order</span>when add-on sold</span></div>
+        <div class="note">Inventory auto-deducts from stock when an order is placed. Low-stock alerts appear in the dashboard sidebar badge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS MODULE -->
+  <div class="section-title"><i class="ti ti-users" aria-hidden="true"></i> 5. Customer management (CRM)</div>
+  <div class="wide-card">
+    <div class="wide-card-head"><i class="ti ti-user-circle" aria-hidden="true"></i><span class="label">Customer profile — full CRM record per customer</span></div>
+    <div class="three-col">
+      <div class="sub-section">
+        <div class="sub-label">Profile</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Full name</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Phone number</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Email address</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Saved delivery addresses</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Date registered</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Account type</span>Guest / Registered / VIP</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Preferred payment</span></span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Order history</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">All past orders</span>with status & amounts</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Total spent (LTV)</span>lifetime value</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Average order value</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Favourite products</span>most ordered</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">First & last order dates</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Refund / complaint history</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">WhatsApp conversation log</span></span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Special dates & notes</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Recipient birthdays saved</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Anniversary dates</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Auto-reminder</span>email 3 days before occasion</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Flower preferences</span>e.g. "hates lilies"</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Allergy notes</span>e.g. pet-safe only</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Staff notes</span>internal comments</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Newsletter subscribed</span>yes / no</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS MODULE -->
+  <div class="divider"></div>
+  <div class="section-title"><i class="ti ti-chart-bar" aria-hidden="true"></i> 6. Analytics & reports</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-report-money" aria-hidden="true"></i><span class="label">Sales reports</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Revenue by day / week / month / year</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Orders count over time</span>trend line chart</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Average order value trend</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Revenue by product</span>top 10 earners</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Revenue by category</span>Birthday vs Wedding vs Romance…</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Revenue by channel</span>website vs WhatsApp vs phone</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Revenue by delivery area</span>Westlands, Karen, etc.</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Discount / coupon usage</span>impact on revenue</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Refund & cancellation totals</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Payment method breakdown</span>M-Pesa vs card vs COD</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Export to CSV / PDF</span></span></div>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-chart-pie" aria-hidden="true"></i><span class="label">Product & customer analytics</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Best-selling products</span>by units & by revenue</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Slow-moving products</span>flag for promotion</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Peak order times</span>heatmap by hour & day</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Seasonal demand trends</span>Valentine's, Mother's Day spikes</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">New vs returning customers</span>ratio over time</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Customer lifetime value</span>top 20 VIP list</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Repeat purchase rate</span>% who order again</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Cart abandonment rate</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Conversion rate</span>visitors to buyers</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Add-on attach rate</span>% orders with vase / chocolates</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery performance</span>on-time % per driver</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETING MODULE -->
+  <div class="section-title"><i class="ti ti-tag" aria-hidden="true"></i> 7. Marketing — discounts, coupons & promotions</div>
+  <div class="wide-card">
+    <div class="wide-card-head"><i class="ti ti-discount" aria-hidden="true"></i><span class="label">Coupons & discount rules</span></div>
+    <div class="two-col">
+      <div class="sub-section">
+        <div class="sub-label">Coupon settings</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Coupon code</span>e.g. WELCOME10</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Discount type</span>% off / fixed KES / free delivery</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Discount value</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Minimum order value</span>to qualify</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Maximum discount cap</span>KES limit</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Valid from / to dates</span></span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Usage limit</span>total uses / per customer</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Applies to</span>all products / specific categories</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">First-order only</span>toggle</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Coupon usage report</span>how many times used</span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Promotions & bundles</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Flash sale</span>time-limited price drop with countdown</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Bundle discount</span>flowers + chocolates = 15% off</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Buy X get Y</span>e.g. buy 12 roses get 6 free</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Free delivery threshold</span>orders over KES 3,000</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Loyalty points program</span>points per KES spent</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Points redemption rules</span>100 pts = KES 100</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Seasonal banners</span>Valentine's / Mother's Day / Eid</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Newsletter discount popup</span>10% off for email signup</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Abandoned cart recovery</span>auto-email with discount</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIPTIONS MODULE -->
+  <div class="divider"></div>
+  <div class="section-title"><i class="ti ti-heart" aria-hidden="true"></i> 8. Flower subscriptions</div>
+  <div class="module-card" style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:10px">
+    <div class="module-card-head"><i class="ti ti-repeat" aria-hidden="true"></i><span class="label">Subscription plan fields</span><span class="badge badge-green">Revenue Retention</span></div>
+    <div class="chip-row">
+      <span class="chip">Plan name (Weekly / Bi-weekly / Monthly)</span>
+      <span class="chip">Bouquet type & size</span>
+      <span class="chip">Price per delivery</span>
+      <span class="chip">Start date</span>
+      <span class="chip">Next delivery date</span>
+      <span class="chip">Delivery address</span>
+      <span class="chip">Time slot preference</span>
+      <span class="chip">Special preferences (no lilies, pet-safe)</span>
+      <span class="chip">Payment method & auto-charge</span>
+      <span class="chip">Subscription status (Active / Paused / Cancelled)</span>
+      <span class="chip">Skip delivery option (customer-controlled)</span>
+      <span class="chip">Renewal reminder (email 3 days before)</span>
+      <span class="chip">Subscription discount applied</span>
+      <span class="chip">Total deliveries made</span>
+      <span class="chip">Revenue per subscriber (LTV)</span>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODULE -->
+  <div class="section-title"><i class="ti ti-settings" aria-hidden="true"></i> 9. Store settings</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-world" aria-hidden="true"></i><span class="label">General settings</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Store name, address, phone</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Currency</span>KES with comma formatting</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Timezone</span>Africa/Nairobi (EAT UTC+3)</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Business hours</span>open / close per day</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Same-day cutoff time</span>default 1:00 PM</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">M-Pesa Paybill / Till number</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">WhatsApp business number</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order prefix</span>e.g. LF-0001</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Tax rate</span>16% VAT Kenya</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Guest checkout</span>on / off</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Maintenance mode</span>take site offline</span></div>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-card-head"><i class="ti ti-mail" aria-hidden="true"></i><span class="label">Email & notification settings</span></div>
+      <div class="field-list">
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order confirmation email</span>to customer</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Order confirmation</span>to admin / florist</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Dispatch notification</span>to recipient</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Delivery confirmation</span>with photo</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Review request</span>24hrs after delivery</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Occasion reminder</span>3 days before birthday / anniversary</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Low stock alert</span>to store manager</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">New order alert</span>push / WhatsApp to owner</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Abandoned cart email</span>with delay timer</span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Email from name & address</span></span></div>
+        <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span><span class="key">Email header logo</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAFF & ROLES -->
+  <div class="section-title"><i class="ti ti-shield-check" aria-hidden="true"></i> 10. Staff accounts & role permissions</div>
+  <div class="wide-card">
+    <div class="wide-card-head"><i class="ti ti-users-group" aria-hidden="true"></i><span class="label">Role-based access control — who can see and do what</span></div>
+    <div class="three-col">
+      <div class="sub-section">
+        <div class="sub-label">Owner / Super admin</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Full access to everything</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Financial reports & exports</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Staff management</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>System settings</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Refunds & cancellations</span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Shop manager</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Orders, delivery, inventory</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Products & categories</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Customers & CRM</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Discounts & promotions</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>No financial data</span></div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-label">Florist / Driver</div>
+        <div class="field-list">
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Own assigned orders only</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Order status updates</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Delivery confirmation + photo</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>Today's delivery list</span></div>
+          <div class="field"><i class="ti ti-point" aria-hidden="true"></i><span>No customer data / pricing</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+</div><!-- /layout -->
+</div><!-- /page -->

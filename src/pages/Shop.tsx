@@ -42,7 +42,7 @@ export default function Shop() {
   return (
     <div className="min-h-screen pb-32">
       {/* Editorial Header */}
-      <section className="py-24 sm:py-32 border-b border-white/5 bg-secondary-black">
+      <section className="py-16 sm:py-24 border-b border-white/5 bg-secondary-black">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl">
             <motion.div
@@ -51,8 +51,8 @@ export default function Shop() {
               transition={{ duration: 1 }}
             >
               <span className="text-primary-pink uppercase tracking-[0.6em] text-[10px] font-black mb-6 block">The Gallery</span>
-              <h1 className="text-6xl sm:text-8xl font-black uppercase leading-none tracking-tighter mb-8">Elevated <br/> Bloom Curation</h1>
-              <p className="text-gray-500 text-lg font-medium max-w-2xl leading-relaxed">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-8">Elevated <br/> Bloom Curation</h1>
+              <p className="text-gray-500 text-base sm:text-lg font-medium max-w-2xl leading-relaxed">
                 Explore our meticulously curated selection of seasonal masterpieces, each artisanally crafted to define your most precious moments.
               </p>
             </motion.div>

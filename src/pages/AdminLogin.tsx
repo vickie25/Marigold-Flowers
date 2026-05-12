@@ -65,7 +65,7 @@ const AdminLogin: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-primary-black border border-white/5 rounded-2xl py-4 pl-12 pr-4 text-sm text-white font-bold outline-none focus:border-primary-gold/30 transition-all placeholder:text-slate-700"
-                  placeholder="admin@marigold.co.ke"
+                  placeholder="sales@madrigoldflowers.com"
                 />
               </div>
             </div>

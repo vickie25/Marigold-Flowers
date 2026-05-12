@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import WhatsAppFAB from './components/WhatsAppFAB';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
@@ -9,6 +10,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Policies from './pages/Policies';
 import Occasions from './pages/Occasions';
+import Events from './pages/Events';
 import Checkout from './pages/Checkout';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
@@ -63,9 +65,11 @@ function AppContent() {
           <Route path="/delivery" element={<Policies type="delivery" />} />
           <Route path="/refund-policy" element={<Policies type="refund" />} />
           <Route path="/occasions" element={<Occasions />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </main>
       
+      <WhatsAppFAB />
       <Footer />
     </div>
   );

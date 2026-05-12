@@ -126,6 +126,13 @@ export default function Navbar() {
             </li>
 
             <li className="h-full flex items-center">
+              <Link to="/events" className="text-[11px] font-black uppercase tracking-[0.2em] hover:text-primary-pink transition-colors relative group">
+                Events
+                <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary-pink transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
+
+            <li className="h-full flex items-center">
               <Link to="/about" className="text-[11px] font-black uppercase tracking-[0.2em] hover:text-primary-gold transition-colors relative group">
                 Our Story
                 <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary-gold transition-all duration-300 group-hover:w-full"></span>
@@ -153,14 +160,7 @@ export default function Navbar() {
                 </span>
               )}
             </button>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://wa.me/254700000000" 
-              className="bg-[#25D366] hover:bg-[#128C7E] text-white px-5 sm:px-7 py-2.5 sm:py-3 rounded-none font-black text-[10px] sm:text-[11px] uppercase tracking-widest flex items-center gap-2 transition-all shadow-xl shadow-green-500/20"
-            >
-              <FiMessageCircle size={18} /> <span className="hidden md:inline">WhatsApp Order</span>
-            </motion.a>
+
           </div>
         </div>
       </motion.nav>
@@ -178,7 +178,7 @@ export default function Navbar() {
             className="fixed inset-0 z-[90] bg-primary-black pt-32 px-10 lg:hidden"
           >
             <ul className="space-y-8">
-              {['Home', 'Shop', 'Occasions', 'Our Story', 'Contact'].map((item) => (
+              {['Home', 'Shop', 'Occasions', 'Events', 'Our Story', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link 
                     to={item === 'Home' ? '/' : item === 'Our Story' ? '/about' : `/${item.toLowerCase()}`}

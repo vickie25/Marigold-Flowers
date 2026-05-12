@@ -42,8 +42,8 @@ export default function Contact() {
                   {[
                     { icon: <FiPhone />, label: 'Concierge', value: '+254 700 000 000' },
                     { icon: <FiMessageCircle />, label: 'WhatsApp', value: '+254 700 000 000', sub: 'Instant Artisan Access' },
-                    { icon: <FiMail />, label: 'Email', value: 'hello@marigold.co.ke' },
-                    { icon: <FiMapPin />, label: 'Studio', value: 'Westlands, Nairobi, Kenya' }
+                    { icon: <FiMail />, label: 'Email', value: 'sales@madrigoldflowers.com' },
+                    { icon: <FiMapPin />, label: 'Studio', value: 'Nairobi CBD, Kenya House Complex' }
                   ].map((item) => (
                     <div key={item.label} className="group">
                       <div className="flex items-center gap-6 mb-4">

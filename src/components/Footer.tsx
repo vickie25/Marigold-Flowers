@@ -67,8 +67,8 @@ export default function Footer() {
               {[
                 { icon: <FiPhone />, text: '+254 700 000 000' },
                 { icon: <FiMessageCircle />, text: 'WhatsApp: +254 700 000 000' },
-                { icon: <FiMail />, text: 'info@marigold.co.ke' },
-                { icon: <FiMapPin />, text: 'Westlands, Nairobi, Kenya' }
+                { icon: <FiMail />, text: 'sales@madrigoldflowers.com' },
+                { icon: <FiMapPin />, text: 'Nairobi CBD, Kenya House Complex' }
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-4 group cursor-pointer">
                   <div className="text-primary-gold mt-1 group-hover:scale-125 transition-transform group-hover:text-primary-pink">{item.icon}</div>

@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[85vh] sm:h-[90vh] flex items-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -63,19 +63,19 @@ export default function Home() {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url('${HERO_SLIDES[currentSlide].image}')` }}
             ></motion.div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-transparent"></div>
 
             <div className="container mx-auto px-6 h-full flex items-center relative z-10">
-              <div className="max-w-4xl">
+              <div className="max-w-5xl pt-20 sm:pt-0">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 1 }}
                 >
-                  <span className="text-primary-gold uppercase tracking-[0.6em] text-[11px] font-black mb-8 block drop-shadow-lg">
+                  <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] sm:text-[11px] font-black mb-4 sm:mb-8 block drop-shadow-lg">
                     {HERO_SLIDES[currentSlide].tagline}
                   </span>
-                  <h1 className="text-5xl md:text-9xl mb-10 leading-[1] font-black tracking-tighter uppercase">
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-6 sm:mb-10 leading-[1.1] font-black tracking-tighter uppercase">
                     {HERO_SLIDES[currentSlide].title.split(' ').map((word, i) => {
                       let colorClass = 'text-white';
                       if (i % 3 === 1) colorClass = 'text-primary-gold';
@@ -83,14 +83,14 @@ export default function Home() {
                       return <span key={i} className={colorClass}>{word} </span>;
                     })}
                   </h1>
-                  <p className="text-lg md:text-2xl text-gray-300 mb-14 max-w-2xl leading-relaxed font-medium">
+                  <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-14 max-w-2xl leading-relaxed font-medium">
                     {HERO_SLIDES[currentSlide].subtitle}
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-6">
-                    <Link to="/shop" className="btn-primary inline-block text-center shadow-2xl shadow-primary-gold/20 py-5 px-12">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                    <Link to="/shop" className="btn-primary inline-block text-center shadow-2xl shadow-primary-gold/20 py-4 sm:py-5 px-8 sm:px-12">
                       {HERO_SLIDES[currentSlide].cta}
                     </Link>
-                    <a href="https://wa.me/254700000000" className="btn-secondary inline-block text-center py-5 px-12 backdrop-blur-md">
+                    <a href="https://wa.me/254700000000" className="btn-secondary inline-block text-center py-4 sm:py-5 px-8 sm:px-12 backdrop-blur-md">
                       WhatsApp Luxury Concierge
                     </a>
                   </div>
@@ -128,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* Trust Metrics */}
-      <section className="bg-primary-black py-24 sm:py-32">
+      <section className="bg-primary-black py-16 sm:py-24">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
             {[
@@ -155,12 +155,12 @@ export default function Home() {
       </section>
 
       {/* New Arrivals Bento Grid */}
-      <section className="py-24 sm:py-48 bg-secondary-black">
+      <section className="py-16 sm:py-24 lg:py-32 bg-secondary-black">
         <div className="container mx-auto px-6">
-          <motion.div {...fadeIn} className="flex flex-col md:flex-row justify-between items-end mb-24 gap-10">
+          <motion.div {...fadeIn} className="flex flex-col md:flex-row justify-between items-end mb-16 sm:mb-24 gap-10">
             <div className="max-w-2xl">
               <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-6 block">New Collections</span>
-              <h2 className="text-5xl sm:text-8xl font-black uppercase tracking-tighter leading-none mb-6">Seasonal Highlights</h2>
+              <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-6">Seasonal Highlights</h2>
               <p className="text-gray-500 text-lg font-medium">Hand-picked curation of this week's most exquisite blooms.</p>
             </div>
             <Link to="/shop" className="btn-secondary group">
@@ -168,7 +168,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-full md:h-[900px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 h-full md:h-[650px] lg:h-[800px] xl:h-[900px]">
             {/* Main Featured */}
             <motion.div {...fadeIn} className="md:col-span-7 relative group overflow-hidden h-[400px] md:h-full border border-white/5">
               <img src={cakeFlowersImg} alt="Featured" className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105" />
@@ -207,11 +207,11 @@ export default function Home() {
       </section>
 
       {/* Categorical Journey */}
-      <section className="py-24 sm:py-48">
+      <section className="py-16 sm:py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <motion.div {...fadeIn} className="text-center mb-32">
             <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-6 block">Our Curation</span>
-            <h2 className="text-5xl sm:text-8xl font-black uppercase leading-none tracking-tighter">Shop by Mood</h2>
+            <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase leading-none tracking-tighter">Shop by Mood</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -235,12 +235,12 @@ export default function Home() {
       </section>
 
       {/* Featured Products Scroll */}
-      <section className="py-24 sm:py-48 bg-secondary-black overflow-hidden">
+      <section className="py-16 sm:py-24 lg:py-32 bg-secondary-black overflow-hidden">
         <div className="container mx-auto px-6">
           <motion.div {...fadeIn} className="flex justify-between items-end mb-24">
             <div>
               <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-6 block">Trending Now</span>
-              <h2 className="text-5xl sm:text-8xl font-black uppercase leading-none tracking-tighter">Iconic Bouquets</h2>
+              <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase leading-none tracking-tighter">Iconic Bouquets</h2>
             </div>
             <div className="hidden md:flex gap-4">
               <button className="w-16 h-16 border border-white/10 flex items-center justify-center hover:bg-primary-gold transition-all"><FiChevronLeft size={24} /></button>
@@ -290,7 +290,7 @@ export default function Home() {
       </section>
 
       {/* Subscription Section */}
-      <section className="py-24 sm:py-48 relative overflow-hidden">
+      <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-fixed bg-center opacity-30 grayscale" style={{ backgroundImage: `url('${privateWeddingImg}')` }}></div>
         <div className="absolute inset-0 bg-gradient-to-b from-primary-black via-transparent to-primary-black"></div>
 
@@ -299,7 +299,7 @@ export default function Home() {
             <motion.div {...fadeIn}>
               <GiButterfly className="text-primary-gold text-6xl mx-auto mb-10 animate-pulse" />
               <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-8 block">The Bloom Club</span>
-              <h2 className="text-5xl sm:text-9xl font-black uppercase leading-none tracking-tighter mb-10">Weekly <br /> Floral Luxury</h2>
+              <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-10">Weekly <br /> Floral Luxury</h2>
               <p className="text-xl text-gray-400 mb-16 leading-relaxed font-medium">
                 Elevate your home or workspace with our signature seasonal arrangements, delivered fresh every week. Cancel anytime, joy guaranteed.
               </p>
@@ -327,12 +327,12 @@ export default function Home() {
       <PromoBanner />
 
       {/* Expert Care Section */}
-      <section className="py-24 sm:py-48 bg-primary-black">
+      <section className="py-16 sm:py-24 lg:py-32 bg-primary-black">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-24 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:w-1/2">
               <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-8 block">Mastery & Care</span>
-              <h2 className="text-5xl sm:text-8xl font-black uppercase leading-none tracking-tighter mb-10">Beyond the <br /> Bouquet</h2>
+              <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase leading-none tracking-tighter mb-10">Beyond the <br /> Bouquet</h2>
               <p className="text-xl text-gray-400 mb-12 leading-relaxed font-medium">
                 "Our relationship with you begins when the flowers arrive. Learn the secrets of longevity from our master florists."
               </p>
@@ -377,18 +377,18 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 sm:py-48 bg-secondary-black">
+      <section className="py-16 sm:py-24 lg:py-32 bg-secondary-black">
         <div className="container mx-auto px-6 text-center">
           <motion.div {...fadeIn} className="mb-32">
             <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-8 block">Public Record</span>
-            <h2 className="text-5xl sm:text-9xl font-black uppercase leading-none tracking-tighter">Society <br /> Chronicles</h2>
+            <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase leading-none tracking-tighter">Society <br /> Chronicles</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((test, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ y: -15, borderColor: '#CA8A04' }}
-                className="p-16 border border-white/5 bg-tertiary-black transition-all duration-700 text-left relative group"
+                className="p-8 sm:p-12 lg:p-16 border border-white/5 bg-tertiary-black transition-all duration-700 text-left relative group"
               >
                 <div className="flex gap-2 text-primary-pink mb-10 group-hover:scale-110 transition-transform">
                   {[...Array(test.stars)].map((_, i) => <FiStar key={i} size={14} fill="currentColor" />)}
@@ -408,12 +408,12 @@ export default function Home() {
       </section>
 
       {/* From the Journal */}
-      <section className="py-24 sm:py-48">
+      <section className="py-16 sm:py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <motion.div {...fadeIn} className="flex flex-col md:flex-row justify-between items-end mb-24 gap-10">
             <div className="max-w-2xl">
               <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-6 block">Editorial</span>
-              <h2 className="text-5xl sm:text-8xl font-black uppercase tracking-tighter leading-none mb-6">From The Journal</h2>
+              <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-6">From The Journal</h2>
               <p className="text-gray-500 text-lg font-medium">Floral design, lifestyle, and the art of giving.</p>
             </div>
             <Link to="/journal" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary-gold border-b-2 border-primary-gold pb-2">Read Journal →</Link>
@@ -480,11 +480,11 @@ export default function Home() {
       </section>
 
       {/* Newsletter */}
-      <section className="relative py-24 sm:py-48 bg-primary-black text-center border-t border-white/5">
+      <section className="relative py-16 sm:py-24 lg:py-32 bg-primary-black text-center border-t border-white/5">
         <div className="container mx-auto px-6 relative z-10">
           <motion.div {...fadeIn}>
             <span className="text-primary-gold uppercase tracking-[0.6em] text-[10px] font-black mb-8 block">E-Journal</span>
-            <h2 className="text-5xl sm:text-9xl text-white mb-10 font-black uppercase leading-none tracking-tighter">Exclusive <br /> Invitations</h2>
+            <h2 className="text-4xl sm:text-6xl lg:text-8xl text-white mb-10 font-black uppercase leading-none tracking-tighter">Exclusive <br /> Invitations</h2>
             <p className="text-gray-400 text-xl mb-16 max-w-2xl mx-auto font-medium">Be the first to secure rare seasonal blooms and receive our private design lookbook.</p>
             <form className="flex flex-col sm:flex-row gap-0 max-w-3xl mx-auto shadow-[0_0_100px_rgba(255,20,147,0.1)] group">
               <input

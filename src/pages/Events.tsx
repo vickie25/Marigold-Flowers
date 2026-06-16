@@ -212,12 +212,12 @@ export default function Events() {
                   </div>
 
                   <div className="flex flex-col gap-3 sm:gap-4">
-                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiCalendar size={10} sm:size={12} /> Event Date</label>
+                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiCalendar size={10} /> Event Date</label>
                     <input type="date" className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium" required />
                   </div>
 
                   <div className="flex flex-col gap-3 sm:gap-4">
-                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiMapPin size={10} sm:size={12} /> Venue Location</label>
+                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiMapPin size={10} /> Venue Location</label>
                     <input type="text" placeholder="Nairobi or Elsewhere" className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium placeholder:text-gray-700" required />
                   </div>
 
@@ -234,7 +234,7 @@ export default function Events() {
 
                   <div className="flex flex-col gap-3 sm:gap-4 sm:col-span-2">
                     <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500">The Vision (Briefly)</label>
-                    <textarea rows={3} sm:rows={4} placeholder="Describe the atmosphere you wish to create..." className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium resize-none placeholder:text-gray-700" required></textarea>
+                    <textarea rows={3} placeholder="Describe the atmosphere you wish to create..." className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium resize-none placeholder:text-gray-700" required></textarea>
                   </div>
 
                   <div className="sm:col-span-2 pt-6 sm:pt-10">

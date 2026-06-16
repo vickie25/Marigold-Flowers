@@ -182,15 +182,15 @@ export default function Events() {
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400">
-                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} sm:size={16} />
+                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} />
                       <span>Complimentary Initial Consultation</span>
                     </div>
                     <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400">
-                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} sm:size={16} />
+                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} />
                       <span>Bespoke Design Presentation</span>
                     </div>
                     <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400">
-                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} sm:size={16} />
+                      <FiCheckCircle className="text-primary-gold flex-shrink-0" size={14} />
                       <span>Full Service Installation</span>
                     </div>
                   </div>
@@ -202,12 +202,12 @@ export default function Events() {
                   <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-primary-gold/5 blur-[80px] sm:blur-[120px] pointer-events-none" />
                   
                   <div className="flex flex-col gap-3 sm:gap-4">
-                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiUsers size={10} sm:size={12} /> Full Identity</label>
+                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiUsers size={10} /> Full Identity</label>
                     <input type="text" placeholder="Your Name" className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium placeholder:text-gray-700" required />
                   </div>
                   
                   <div className="flex flex-col gap-3 sm:gap-4">
-                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiMessageSquare size={10} sm:size={12} /> Digital Address</label>
+                    <label className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-gray-500 flex items-center gap-2"><FiMessageSquare size={10} /> Digital Address</label>
                     <input type="email" placeholder="email@address.com" className="bg-transparent border-b border-white/10 px-0 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-primary-gold transition-colors text-white font-medium placeholder:text-gray-700" required />
                   </div>
 
